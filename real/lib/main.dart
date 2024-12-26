@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:real/screen/cart/cart_screen.dart';
+import 'package:real/screen/cart/listCart_screen.dart';
+import 'package:real/screen/checkout_screen.dart';
 import 'package:real/screen/custom_bottom_bar.dart';
 
 void main() {
@@ -12,10 +15,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false, 
-      home: CustomBottomBar(     
-      ),
+    return MaterialApp(
+      //debugShowCheckedModeBanner: false,
+      home: CheckOutScreen(),
     );
   }
 }
