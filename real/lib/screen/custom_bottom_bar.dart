@@ -2,9 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:real/ShipingAddress.dart';
+import 'package:real/screen/dangky.dart';
+import 'package:real/screen/editProfileScreen.dart';
 
 import 'package:real/screen/home_screen.dart';
 import 'package:real/screen/profile_screen.dart';
+import 'package:real/screen/quenmatkhau.dart';
 import 'package:real/screen/suggest_screen.dart';
 
 class CustomBottomBar extends StatefulWidget {
@@ -48,6 +52,13 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         email: '',
         sdt: '',
       ), // Màn hình Profile
+      LoginRegistrationScreen(),
+      ShippingAddressScreen(),
+      quenmatkhau(),
+      EditProfileScreen(
+        hoTen: '',
+        sdt: '',
+      ),
     ];
   }
 
