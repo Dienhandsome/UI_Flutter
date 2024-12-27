@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:real/screen/DangNhap.dart';
-import 'package:real/screen/dangky.dart';
 
 void main() {
   runApp(const MainApp());
