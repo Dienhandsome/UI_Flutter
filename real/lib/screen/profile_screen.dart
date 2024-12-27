@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:real/ShipingAddress.dart';
+import 'package:real/screen/ShipingAddress.dart';
 import 'package:real/screen/editProfileScreen.dart';
 import 'package:real/screen/quenmatkhau.dart';
 

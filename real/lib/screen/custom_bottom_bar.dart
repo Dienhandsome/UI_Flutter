@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:real/ShipingAddress.dart';
+import 'package:real/screen/ShipingAddress.dart';
 import 'package:real/screen/dangky.dart';
 import 'package:real/screen/editProfileScreen.dart';
 
