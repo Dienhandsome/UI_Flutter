@@ -27,13 +27,37 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/images/banner3.jpg',
   ];
 
-    final List<Product> products = [
-    Product(name: 'Sản phẩm 1', price: 10, imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.p4ShYZkCKx6UZEq5aOuOwQHaE1&pid=Api&P=0&h=180'),
-    Product(name: 'Sản phẩm 2', price: 20, imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.p4ShYZkCKx6UZEq5aOuOwQHaE1&pid=Api&P=0&h=180'),
-    Product(name: 'Sản phẩm 3', price: 30, imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.TtDe_6uMVFCWlI589foOgQHaHa&pid=Api&P=0&h=180'),
-    Product(name: 'Sản phẩm 4', price: 40, imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.Auc77FKDft0XxzROn9n1gAHaEo&pid=Api&P=0&h=180'),
-    Product(name: 'Sản phẩm 5', price: 50, imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.gGcHq9omSNT3Cj2iL-V3jAHaE6&pid=Api&P=0&h=180'),
-    Product(name: 'Sản phẩm 6', price: 60, imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.Auc77FKDft0XxzROn9n1gAHaEo&pid=Api&P=0&h=180'),
+  final List<Product> products = [
+    Product(
+        name: 'Sản phẩm 1',
+        price: 10,
+        imageUrl:
+            'https://tse3.mm.bing.net/th?id=OIP.p4ShYZkCKx6UZEq5aOuOwQHaE1&pid=Api&P=0&h=180'),
+    Product(
+        name: 'Sản phẩm 2',
+        price: 20,
+        imageUrl:
+            'https://tse3.mm.bing.net/th?id=OIP.p4ShYZkCKx6UZEq5aOuOwQHaE1&pid=Api&P=0&h=180'),
+    Product(
+        name: 'Sản phẩm 3',
+        price: 30,
+        imageUrl:
+            'https://tse2.mm.bing.net/th?id=OIP.TtDe_6uMVFCWlI589foOgQHaHa&pid=Api&P=0&h=180'),
+    Product(
+        name: 'Sản phẩm 4',
+        price: 40,
+        imageUrl:
+            'https://tse3.mm.bing.net/th?id=OIP.Auc77FKDft0XxzROn9n1gAHaEo&pid=Api&P=0&h=180'),
+    Product(
+        name: 'Sản phẩm 5',
+        price: 50,
+        imageUrl:
+            'https://tse3.mm.bing.net/th?id=OIP.gGcHq9omSNT3Cj2iL-V3jAHaE6&pid=Api&P=0&h=180'),
+    Product(
+        name: 'Sản phẩm 6',
+        price: 60,
+        imageUrl:
+            'https://tse3.mm.bing.net/th?id=OIP.Auc77FKDft0XxzROn9n1gAHaEo&pid=Api&P=0&h=180'),
   ];
 
   final List<CategoryModel> categoriesList = [
@@ -442,55 +466,54 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-        Padding(
-  padding: EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Center(
-        child: TextButton(
-          onPressed: () {
-            // Chuyển đến màn hình hiển thị tất cả sản phẩm
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductListScreen(products: products),
+            Padding(
+              padding: EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        // Chuyển đến màn hình hiển thị tất cả sản phẩm
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProductListScreen(products: products),
+                          ),
+                        );
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Xem thêm',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'Sản Phẩm',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            );
-          },
-          child: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Xem thêm ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                TextSpan(
-                  text: 'Sản Phẩm',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
             ),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
           ],
         ),
       ),
     );
   }
-
-
 }
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables ok
