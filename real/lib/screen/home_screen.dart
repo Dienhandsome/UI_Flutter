@@ -1,13 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+
+  // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:real/model/category_model.dart';
-import 'package:real/model/product_model.dart';
+import 'package:real/models/category_model.dart';
+import 'package:real/models/product_model.dart';
 import 'package:real/screen/category_view.dart';
 import 'package:real/screen/product_screen.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.FQ2j6s8HETuR-KvPlrEjHgHaHa&pid=Api&P=0&h=180',name: '', price: ''),
       ],
     ),
-     CategoryModel(
+    CategoryModel(
       image: 'assets/images/category5.jpg',
       products: [
         ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.Auc77FKDft0XxzROn9n1gAHaEo&pid=Api&P=0&h=180',name: '', price: ''),
@@ -75,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.OnGq7MYe6CMb37EpzQ-NEgHaEM&pid=Api&P=0&h=180',name: '', price: ''),
       ],
     ),
-     
   ];
 
   @override
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: const Color.fromARGB(255, 28, 27, 27).withOpacity(0.5), // Màu viền đen mờ
                   width: 2.0,
                 ),
-                borderRadius: BorderRadius.circular(25.0), // Bo tròn viền
+                borderRadius: BorderRadius.circular(25.0),
                 color: Colors.white,
               ),
               child: ClipOval(
@@ -125,11 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   'assets/images/logo2.jpg',
                   width: 30,
                   height: 36,
-                  fit: BoxFit.cover, // Đảm bảo ảnh khớp với viền
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(width: 8), // Khoảng cách giữa ảnh và văn bản
+            SizedBox(width: 8),
             Text('ĐT - Market'),
           ],
         ),
@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: EdgeInsets.all(12.0),
               child: Container(
-                height: 150, // Chiều cao của banner
+                height: 150,
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: _bannerImages.length,

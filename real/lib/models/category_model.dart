@@ -1,8 +1,8 @@
-import 'package:real/model/product_model.dart';
+import 'package:real/models/product_model.dart';
 
 class CategoryModel {
   final String image;
- final List<ProductModel> products;
- 
+  final List<ProductModel> products;
+
   CategoryModel({required this.image, required this.products});
 }
