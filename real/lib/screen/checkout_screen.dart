@@ -64,7 +64,7 @@ class CheckOutScreen extends StatelessWidget {
                     offset: Offset(0, 1), // changes position of shadow
                   ),
                 ],
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,11 +81,12 @@ class CheckOutScreen extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 30, 147, 44),
-                        ),
-                      ),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 30, 147, 44),
+                          ),
+                          borderRadius: BorderRadius.circular(50)),
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(
                           color: const Color.fromARGB(255, 129, 131, 4),
                         ),
@@ -114,6 +115,7 @@ class CheckOutScreen extends StatelessWidget {
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(
                           color: const Color.fromARGB(255, 129, 131, 4),
                         ),
@@ -142,6 +144,7 @@ class CheckOutScreen extends StatelessWidget {
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(
                           color: const Color.fromARGB(255, 129, 131, 4),
                         ),
@@ -170,6 +173,7 @@ class CheckOutScreen extends StatelessWidget {
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(
                           color: const Color.fromARGB(255, 129, 131, 4),
                         ),
