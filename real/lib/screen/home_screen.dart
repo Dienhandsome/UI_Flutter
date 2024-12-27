@@ -489,7 +489,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: 'Xem thêm',
+                              text: 'Xem thêm ',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 17,
