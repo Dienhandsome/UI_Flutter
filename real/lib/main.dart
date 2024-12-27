@@ -8,7 +8,7 @@ import 'package:real/screen/cart/cart_screen.dart';
 import 'package:real/screen/cart/listCart_screen.dart';
 import 'package:real/screen/checkout_screen.dart';
 import 'package:real/screen/custom_bottom_bar.dart';
-
+import 'package:real/screen/dangky.dart';
 
 void main() {
   runApp(const MainApp());
@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
 
       //debugShowCheckedModeBanner: false,
-      home: CheckOutScreen(),
+      home: LoginRegistrationScreen(),
     );
   }
 }
