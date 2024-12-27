@@ -10,9 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   persistent_bottom_nav_bar: ^6.2.1
-  convex_bottom_bar: ^3.2.0v
+  convex_bottom_bar: ^3.2.0
   intl: ^0.20.1
-  shimmer: ^2.0.0
+  shimmer: ^3.0.0
   http: ^1.1.0
 
 dev_dependencies:
