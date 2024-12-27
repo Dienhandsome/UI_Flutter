@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:real/model/category_model.dart';
 import 'package:real/model/product_model.dart';
+import 'package:real/screen/category_view.dart';
+import 'package:real/screen/product_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
+  late ProductModel product;
   int _currentPage = 0;
   late Timer _timer;
 
@@ -29,47 +32,47 @@ class _HomeScreenState extends State<HomeScreen> {
     CategoryModel(
       image: 'assets/images/category1.jpg',
       products: [
-        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.TXjMRAiUz5Fx6hU5slDNHQHaGU&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.oB08J_GVu4N96BG8MJhlPgHaHa&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.61tyON9ydI8x6lxev1ZlygHaG4&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.0uGAuqvhMSg36nuUJvPlCQHaHa&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.1vXSmAyiSwC3eSKjRuicewHaJy&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.Ig8ocZc1Z4gBl46X5mZDrwHaG3&pid=Api&P=0&h=180'),
+        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.TXjMRAiUz5Fx6hU5slDNHQHaGU&pid=Api&P=0&h=180', name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.oB08J_GVu4N96BG8MJhlPgHaHa&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.61tyON9ydI8x6lxev1ZlygHaG4&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.0uGAuqvhMSg36nuUJvPlCQHaHa&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.1vXSmAyiSwC3eSKjRuicewHaJy&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.Ig8ocZc1Z4gBl46X5mZDrwHaG3&pid=Api&P=0&h=180',name: '', price: ''),
       ],
     ),
     CategoryModel(
       image: 'assets/images/category2.jpg',
       products: [ 
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.p4ShYZkCKx6UZEq5aOuOwQHaE1&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.jEJ6UnJMPEAEnxD68mOkRAHaEl&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.pjbUBm4nnX5nNGp2FqB5WwHaDk&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.t5rP0CvS0tBGSbhlDq3TbwHaEK&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.eR1Ka7PoobAGbyoNntAjtQHaEo&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.jbjZ0MZ9W4wKPaXAvImvsQHaHa&pid=Api&P=0&h=180'),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.p4ShYZkCKx6UZEq5aOuOwQHaE1&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.jEJ6UnJMPEAEnxD68mOkRAHaEl&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.pjbUBm4nnX5nNGp2FqB5WwHaDk&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.t5rP0CvS0tBGSbhlDq3TbwHaEK&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.eR1Ka7PoobAGbyoNntAjtQHaEo&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.jbjZ0MZ9W4wKPaXAvImvsQHaHa&pid=Api&P=0&h=180',name: '', price: ''),
       ],
     ),
     CategoryModel(
       image: 'assets/images/category3.jpg',
       products: [
-        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.TtDe_6uMVFCWlI589foOgQHaHa&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.kjythFh_NZuHOA_o7T6i7AHaHa&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.yxRNaxDznwA1b79wJbYwGAHaHa&pid=Api&P=0&h=180'),
+        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.TtDe_6uMVFCWlI589foOgQHaHa&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.kjythFh_NZuHOA_o7T6i7AHaHa&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.yxRNaxDznwA1b79wJbYwGAHaHa&pid=Api&P=0&h=180',name: '', price: ''),
       ],
     ),
     CategoryModel(
       image: 'assets/images/category4.jpg',
       products: [
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.gGcHq9omSNT3Cj2iL-V3jAHaE6&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.yE-TBtnxltWNVYlS5LkLDwHaFj&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.FQ2j6s8HETuR-KvPlrEjHgHaHa&pid=Api&P=0&h=180'),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.gGcHq9omSNT3Cj2iL-V3jAHaE6&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.yE-TBtnxltWNVYlS5LkLDwHaFj&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.FQ2j6s8HETuR-KvPlrEjHgHaHa&pid=Api&P=0&h=180',name: '', price: ''),
       ],
     ),
      CategoryModel(
       image: 'assets/images/category5.jpg',
       products: [
-        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.Auc77FKDft0XxzROn9n1gAHaEo&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.c5grqFlHem4kdMw6iCIljQHaE8&pid=Api&P=0&h=180'),
-        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.OnGq7MYe6CMb37EpzQ-NEgHaEM&pid=Api&P=0&h=180'),
+        ProductModel(imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.Auc77FKDft0XxzROn9n1gAHaEo&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.c5grqFlHem4kdMw6iCIljQHaE8&pid=Api&P=0&h=180',name: '', price: ''),
+        ProductModel(imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.OnGq7MYe6CMb37EpzQ-NEgHaEM&pid=Api&P=0&h=180',name: '', price: ''),
       ],
     ),
      
@@ -224,12 +227,99 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 200, // Đặt chiều cao xác định cho phần còn lại của màn hình
-              child: Center(
-                child: Text("Welcome to Home Screen"),
-              ),
+  
+          Padding(
+  padding: EdgeInsets.all(12.0),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Sản phẩm',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 12),
+      GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(12.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, // 3 sản phẩm trên 1 hàng
+          crossAxisSpacing: 12.0,
+          mainAxisSpacing: 12.0,
+          childAspectRatio: 0.6, // Điều chỉnh tỉ lệ sản phẩm
+        ),
+        itemCount: categoriesList.expand((category) => category.products).length,
+        itemBuilder: (context, index) {
+          final product = categoriesList.expand((category) => category.products).toList()[index];
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12.0),
             ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 12.0),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: Image.network(
+                    product.imageUrl,
+                    height: 70,
+                    width: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(height: 2.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    product.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 2.0),
+                Text(
+                  'Price: \$${product.price}',
+                  style: TextStyle(fontSize: 14),
+                ),
+               
+               
+                SizedBox(height: 4.0),
+                SizedBox(
+                  height: 40,
+                  width: 100,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      // Thêm logic xử lý khi nhấn nút
+                    },
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
+                      side: BorderSide(color: Colors.black, width: 1.5),
+                    ),
+                    child: Text(
+                      'Buy',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    ],
+  ),
+)
+
           ],
         ),
       ),
@@ -237,35 +327,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class CategoryView extends StatelessWidget {
-  final CategoryModel categoryModel;
-
-  const CategoryView({Key? key, required this.categoryModel}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sản phẩm'),
-      ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(12.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 12.0,
-          mainAxisSpacing: 12.0,
-        ),
-        itemCount: categoryModel.products.length,
-        itemBuilder: (context, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Image.network(
-              categoryModel.products[index].imageUrl,
-              fit: BoxFit.cover,
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
