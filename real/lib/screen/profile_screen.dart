@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:real/screen/DangNhap.dart';
 import 'package:real/screen/ShipingAddress.dart';
 import 'package:real/screen/editProfileScreen.dart';
 import 'package:real/screen/quenmatkhau.dart';
@@ -133,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                elevation: 5,
+                elevation: 10,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 0.0,
@@ -161,6 +162,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 15),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SignIn()), // Điều hướng đến màn hình đăng nhập
+                  );
+                },
+                child: Text(
+                  'Đăng xuất',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+              )
             ],
           ),
         ),
