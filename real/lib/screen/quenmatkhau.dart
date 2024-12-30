@@ -105,7 +105,10 @@ class _quenmatkhauState extends State<quenmatkhau> {
                 ),
                 child: Text(
                   'Gửi Yêu Cầu',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
               SizedBox(height: 20),
@@ -116,7 +119,7 @@ class _quenmatkhauState extends State<quenmatkhau> {
                 child: Text(
                   'Quay lại',
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 23,
                       fontWeight: FontWeight.bold,
                       color: const Color.fromARGB(255, 255, 255, 255)),
                 ),

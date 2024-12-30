@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:real/screen/DangNhap.dart';
 import 'package:real/screen/ShipingAddress.dart';
 import 'package:real/screen/dangky.dart';
 import 'package:real/screen/editProfileScreen.dart';
@@ -52,13 +53,14 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         email: '',
         sdt: '',
       ), // Màn hình Profile
-      LoginRegistrationScreen(),
+      SignUpForm(),
       ShippingAddressScreen(),
       quenmatkhau(),
       EditProfileScreen(
         hoTen: '',
         sdt: '',
       ),
+      SignIn(),
     ];
   }
 
