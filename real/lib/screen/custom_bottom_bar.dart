@@ -28,7 +28,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.react,
         // backgroundColor:  const Color.fromARGB(255, 127, 221, 145),
-        backgroundColor: Color(0xFF81C408), // Màu xanh lá cây chính
+        backgroundColor: Color.fromARGB(255, 94, 133, 22), // Màu xanh lá cây chính
         items: _navBarsItems(),
         activeColor:
             const Color.fromARGB(255, 24, 26, 24), // Màu active mặc định
