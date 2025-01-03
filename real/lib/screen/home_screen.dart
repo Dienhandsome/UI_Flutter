@@ -254,7 +254,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       color: Colors.grey[100], // Nền màu bạc
                       border: Border.all(
-                        color: const Color.fromARGB(255, 63, 62, 62), // Màu viền
+                        color:
+                            const Color.fromARGB(255, 63, 62, 62), // Màu viền
                         width: 1.0, // Độ dày viền
                       ),
                       borderRadius: BorderRadius.circular(20.0), // Bo góc viền
@@ -264,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           5.0), // Khoảng cách giữa viền và icon
                       child: Icon(
                         Icons.shopping_cart,
-                        color: Color.fromARGB(255, 103, 149, 19),
+                        color: Color(0xFF4CAF50),
                       ),
                     )))
           ],
@@ -462,8 +463,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: OutlinedButton(
                                         onPressed: () {
                                           // Thêm logic xử lý khi nhấn nút
-                                          Navigator.push(context, 
-                                              MaterialPageRoute(builder: (context) => ProductDetails(),));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductDetails(),
+                                              ));
                                         },
                                         style: OutlinedButton.styleFrom(
                                           backgroundColor: Colors.grey[300],

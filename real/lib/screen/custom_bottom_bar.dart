@@ -21,23 +21,36 @@ class CustomBottomBar extends StatefulWidget {
 
 class _CustomBottomBarState extends State<CustomBottomBar> {
   int _selectedIndex = 0;
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildScreens()[_selectedIndex],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        children: _buildScreens(),
+      ),
       bottomNavigationBar: ConvexAppBar(
-        style: TabStyle.react,
-        // backgroundColor:  const Color.fromARGB(255, 127, 221, 145),
-        backgroundColor: Color.fromARGB(255, 94, 133, 22), // Màu xanh lá cây chính
+        style: TabStyle.titled,
+        backgroundColor: Colors.white,
+        color: Colors.grey,
+        activeColor: Colors.green[700],
         items: _navBarsItems(),
-        activeColor:
-            const Color.fromARGB(255, 24, 26, 24), // Màu active mặc định
         initialActiveIndex: _selectedIndex,
         onTap: (int index) {
           setState(() {
             _selectedIndex = index;
           });
+          _pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
         },
       ),
     );
@@ -46,21 +59,13 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   /// Danh sách các màn hình tương ứng với mỗi tab
   List<Widget> _buildScreens() {
     return [
-      HomeScreen(), // Màn hình Home
+      HomeScreen(),
       SuggestScreen(),
       ProfileScreen(
         hoTen: '',
         email: '',
         sdt: '',
-      ), // Màn hình Profile
-      SignUpForm(),
-      ShippingAddressScreen(),
-      quenmatkhau(),
-      EditProfileScreen(
-        hoTen: '',
-        sdt: '',
       ),
-      SignIn(),
     ];
   }
 
@@ -70,17 +75,17 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
       TabItem(
         icon: Icons.category_rounded,
         title: "Sản phẩm",
-        //activeIcon: Icon(Icons.home, color: Colors.purple),
+        activeIcon: Icon(Icons.category_rounded, size: 30, color: Colors.green),
       ),
       TabItem(
         icon: Icons.auto_awesome,
         title: "Gợi ý",
-        //activeIcon: Icon(Icons.shopping_bag, color: Colors.pinkAccent),
+        activeIcon: Icon(Icons.auto_awesome, size: 30, color: Colors.green),
       ),
       TabItem(
         icon: Icons.person_2_outlined,
         title: "Tài khoản",
-        activeIcon: Icon(Icons.person, color: Colors.deepOrange),
+        activeIcon: Icon(Icons.person, size: 30, color: Colors.green),
       ),
     ];
   }
