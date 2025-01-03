@@ -16,7 +16,7 @@ class _quenmatkhauState extends State<quenmatkhau> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Đã gửi email khôi phục mật khẩu tới $email'),
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF4CAF50),
         ),
       );
     } else {
@@ -33,7 +33,7 @@ class _quenmatkhauState extends State<quenmatkhau> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF81C408),
+        backgroundColor: Color(0xFF4CAF50),
         title: Text('Quên Mật Khẩu', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         elevation: 0,
@@ -44,7 +44,7 @@ class _quenmatkhauState extends State<quenmatkhau> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 129, 196, 8),
+                Color(0xFF4CAF50),
                 Color.fromARGB(255, 177, 241, 177),
               ],
               begin: Alignment.topCenter,
@@ -86,7 +86,7 @@ class _quenmatkhauState extends State<quenmatkhau> {
                   filled: true,
                   fillColor: Colors.white,
                   hintText: 'Email của bạn',
-                  prefixIcon: Icon(Icons.email, color: Color(0xFF81C408)),
+                  prefixIcon: Icon(Icons.email, color: Color(0xFF4CAF50)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
@@ -97,7 +97,7 @@ class _quenmatkhauState extends State<quenmatkhau> {
               ElevatedButton(
                 onPressed: _resetPassword,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF81C408),
+                  backgroundColor: Color(0xFF4CAF50),
                   minimumSize: Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -119,7 +119,7 @@ class _quenmatkhauState extends State<quenmatkhau> {
                 child: Text(
                   'Quay lại',
                   style: TextStyle(
-                      fontSize: 23,
+                      fontSize: 19,
                       fontWeight: FontWeight.bold,
                       color: const Color.fromARGB(255, 255, 255, 255)),
                 ),
