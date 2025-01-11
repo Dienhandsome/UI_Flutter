@@ -1,4 +1,8 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
+import 'package:real/services/login_service.dart';
+import 'package:real/services/token_service.dart';
 import 'custom_bottom_bar.dart'; // Đảm bảo bạn đã import đúng màn hình CustomBottomBar
 import 'dangky.dart'; // Đảm bảo bạn đã import đúng lớp DangKy
 
@@ -9,8 +13,43 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
+  final LoginService _loginService = LoginService();
+  final TokenService _tokenService = TokenService();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void _login() async {
+    if (_formKey.currentState!.validate()) {
+      // Add form validation
+      try {
+        final result = await _loginService.login(
+          _emailController.text,
+          _passwordController.text,
+        );
+        if (result != null) {
+          await _tokenService.saveTokens(
+            result['access_token'],
+            result['refresh_token'],
+          );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => CustomBottomBar()),
+          );
+        } else {
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Đăng nhập thất bại')),
+          );
+        }
+      } catch (e) {
+        print('Login failed: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Lỗi đăng nhập: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,24 +134,28 @@ class _SignInState extends State<SignIn> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 30),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // Chuyển tới màn hình CustomBottomBar khi đăng nhập thành công
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CustomBottomBar(),
+                        SizedBox(height: 20),
+                        Center(
+                          child: SizedBox(
+                            width: 150, // Make button full width
+                            child: ElevatedButton(
+                              onPressed: _login,
+                              child: Text(
+                                'Đăng nhập',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(255, 32, 32, 32),
+                                  fontSize: 13,
                                 ),
-                              );
-                            }
-                          },
-                          child: Text('Đăng nhập'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF81C408),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF81C408),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10), // Add some padding
+                              ),
                             ),
                           ),
                         ),
