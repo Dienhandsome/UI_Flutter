@@ -1,6 +1,4 @@
-
-
-  // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -8,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:real/models/category_model.dart';
 import 'package:real/models/product_model.dart';
 import 'package:real/screen/category_view.dart';
+import 'package:real/screen/product_details.dart';
 import 'package:real/screen/product_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -227,9 +226,9 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 50,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: const Color.fromARGB(255, 28, 27, 27)
+                  color: const Color.fromARGB(255, 127, 117, 117)
                       .withOpacity(0.5), // Màu viền đen mờ
-                  width: 2.0,
+                  width: 1.0,
                 ),
                 borderRadius: BorderRadius.circular(25.0),
                 color: Colors.white,
@@ -243,8 +242,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(width: 8),
+            Row(
+              children: [
+                SizedBox(width: 8),
+              ],
+            ),
             Text('ĐT - Market'),
+            Padding(
+                padding: const EdgeInsets.only(left: 170.0),
+                child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100], // Nền màu bạc
+                      border: Border.all(
+                        color:
+                            const Color.fromARGB(255, 63, 62, 62), // Màu viền
+                        width: 1.0, // Độ dày viền
+                      ),
+                      borderRadius: BorderRadius.circular(20.0), // Bo góc viền
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(
+                          5.0), // Khoảng cách giữa viền và icon
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: Color(0xFF4CAF50),
+                      ),
+                    )))
           ],
         ),
       ),
@@ -440,6 +463,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: OutlinedButton(
                                         onPressed: () {
                                           // Thêm logic xử lý khi nhấn nút
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductDetails(),
+                                              ));
                                         },
                                         style: OutlinedButton.styleFrom(
                                           backgroundColor: Colors.grey[300],
