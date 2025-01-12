@@ -64,7 +64,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         _selectedGender = value!;
                       });
                     },
-                    activeColor: Color(0xFF81C408),
+                    activeColor: Color(0xFF4CAF50),
                   ),
                   Text('Nam'),
                   SizedBox(width: 20),
@@ -76,7 +76,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         _selectedGender = value!;
                       });
                     },
-                    activeColor: Color(0xFF81C408),
+                    activeColor: Color(0xFF4CAF50),
                   ),
                   Text('Nữ'),
                 ],
@@ -88,7 +88,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   labelText: 'Họ và tên',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF81C408)),
+                    borderSide: BorderSide(color: Color(0xFF4CAF50)),
                   ),
                 ),
               ),
@@ -100,7 +100,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   labelText: 'Số điện thoại',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF81C408)),
+                    borderSide: BorderSide(color: Color(0xFF4CAF50)),
                   ),
                 ),
               ),
@@ -118,7 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF81C408),
+                    backgroundColor: Color(0xFF4CAF50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),

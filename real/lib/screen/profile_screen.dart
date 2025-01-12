@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Color(0xFF81C408),
+        backgroundColor: Color(0xFF4CAF50),
         title: Text(
           'Hồ Sơ Cá Nhân',
           style: TextStyle(color: Colors.white),
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       required Function() onTap}) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: Color(0xFF81C408),
+        backgroundColor: Color(0xFF4CAF50),
         child: Icon(icon, color: Colors.white),
       ),
       title: Text(

@@ -12,11 +12,11 @@ class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
   final SignUpService _signupService = SignUpService();
   void _signup() async {
     if (_formKey.currentState!.validate()) {
@@ -54,8 +54,10 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Đăng Ký')),
-        backgroundColor: Color(0xFF81C408),
+        title: Text('Đăng Ký',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        backgroundColor: Color(0xFF4CAF50),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -236,6 +238,42 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String labelText,
+    required String hintText,
+    bool obscureText = false,
+    required String? Function(String?) validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      style: TextStyle(fontSize: 14),
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(fontSize: 14, color: Colors.black54),
+        hintText: hintText,
+        hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: Color(0xFF4CAF50)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: Color(0xFF4CAF50)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: Color(0xFF4CAF50), width: 2),
+        ),
+      ),
+      validator: validator,
     );
   }
 }
