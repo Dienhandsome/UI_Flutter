@@ -23,15 +23,19 @@ class _SignInState extends State<SignIn> {
     if (_formKey.currentState!.validate()) {
       // Add form validation
       try {
-        final result = await _loginService.login(
-          _emailController.text,
-          _passwordController.text,
-        );
-        if (result != null) {
-          await _tokenService.saveTokens(
-            result['access_token'],
-            result['refresh_token'],
-          );
+        final response = await _loginService.login(
+            _emailController.text, _passwordController.text);
+        if (response != null) {
+          //Lưu token vào bộ nhớ
+          final result = response['result'];
+          final accessToken = result['token'] as String;
+          final refreshToken = result['refreshToken'] as String;
+          //store token
+          await _tokenService.saveTokens(accessToken, refreshToken);
+
+          String access_Token = await _tokenService.getAccessToken();
+          print("access_Token: $access_Token");
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => CustomBottomBar()),
