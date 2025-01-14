@@ -3,9 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:real/helpers/auth_helper.dart';
 import 'package:real/models/GroupThucPham_model.dart';
 import 'package:real/provider/cart_provider.dart';
+import 'package:real/provider/checkout_provider.dart';
+import 'package:real/screen/custom_bottom_bar.dart';
 import 'package:real/services/Cart_service.dart';
+import 'package:real/services/Order_service.dart';
+import 'package:real/widgets/CheckInfor_widget.dart';
 import 'package:real/widgets/Quanlity_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -18,12 +23,27 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   bool isLoading = true;
+
+  // Future<void> _checkAuthAndLoadCart() async {
+  //   final isAuthenticated = await AuthHelper.checkAuthAndNavigate(context);
+  //   if (isAuthenticated) {
+  //     await _loadCartItems();
+  //   } else {
+  //     if (mounted) {
+  //       Navigator.pop(context); // Quay lại màn hình trước đó
+  //     }
+  //   }
+  // }
+
   @override
   void initState() {
     super.initState();
     final appProvider = Provider.of<Aprovider>(context, listen: false);
     appProvider.loadCartFromSharedPreferences();
-    // appProvider.updateCartItems(appProvider.cartItems);
+    final checkoutProvider =
+        Provider.of<CheckoutProvider>(context, listen: false);
+    checkoutProvider.loadFromSharedPreferences();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       appProvider.loadCartFromSharedPreferences();
     });
@@ -32,6 +52,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<Aprovider>(context);
+
     final cartItems = appProvider.cartItems;
     return Scaffold(
       appBar: PreferredSize(
@@ -47,7 +68,9 @@ class _CartScreenState extends State<CartScreen> {
                   color: const Color.fromARGB(255, 39, 38, 38)),
               padding: EdgeInsets.only(left: 10),
               iconSize: 22,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
             title: Text("Giỏ Hàng", style: TextStyle(fontSize: 26)),
             centerTitle: true,
@@ -77,56 +100,7 @@ class _CartScreenState extends State<CartScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Thông tin giao hàng
-              Container(
-                margin: EdgeInsets.fromLTRB(6, 12, 6, 6),
-                padding: EdgeInsets.all(8), // Padding bên trong
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 34, 121, 25)
-                          .withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 3,
-                      offset: Offset(0, 1),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween, // Căn chỉnh nội dung dọc
-                  children: [
-                    Text(
-                      "Giao đến",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    SizedBox(height: 4), // Khoảng cách nhỏ giữa các phần
-                    Text(
-                      "14/8 đường số 4 , Phường Hiệp Bình Phước (Q.Thủ Đức, TP.HCM)",
-                      style: TextStyle(
-                          color: const Color.fromARGB(255, 122, 116, 116),
-                          fontSize: 16),
-                    ),
-                    Text(
-                      "Chị Đạt, 012345678",
-                      style: TextStyle(
-                          color: const Color.fromARGB(255, 122, 116, 116),
-                          fontSize: 16),
-                    ),
-                    Text(
-                      "Giao trước 16h hôm nay",
-                      style: TextStyle(
-                          color: const Color.fromARGB(255, 25, 122, 28),
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
+              CheckInforWidget(),
 
               //Danh sách giỏ hàng
               Container(
@@ -269,43 +243,67 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       bottomNavigationBar: PreferredSize(
-        preferredSize: Size.fromHeight(500), // Đặt chiều cao mong muốn
+        preferredSize: Size.fromHeight(80),
         child: BottomAppBar(
           color: Colors.white,
-          shape: CircularNotchedRectangle(),
           child: Container(
-            height: 250, // Đặt chiều cao phù hợp với PreferredSize
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 50, // Chiều cao của nút
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color.fromARGB(255, 201, 220, 34),
-                          Color.fromARGB(255, 15, 79, 9),
-                        ],
+            height: 80,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: GestureDetector(
+                onTap: () async {
+                  final orderService = OrderService();
+                  final success = await orderService.createOrder(cartItems);
+
+                  if (success) {
+                    // Clear cart after successful order
+                    appProvider.clearCart();
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Đặt hàng thành công'),
+                        backgroundColor: Colors.green,
                       ),
-                      borderRadius: BorderRadius.circular(20),
+                    );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CustomBottomBar()),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Đặt hàng thất bại'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromARGB(255, 201, 220, 34),
+                        Color.fromARGB(255, 15, 79, 9),
+                      ],
                     ),
-                    child: Text(
-                      "Đặt hàng ngay",
-                      style: TextStyle(
-                        fontSize: 20, // Font chữ lớn hơn
-                        color: Colors.white, // Màu chữ trắng
-                        fontWeight: FontWeight.bold,
-                      ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "Đặt hàng ngay",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),

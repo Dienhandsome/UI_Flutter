@@ -39,14 +39,49 @@ class HaveThongTinWidget extends StatelessWidget {
           Text("Giao đến",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           SizedBox(height: 5),
-          Text(checkoutInfo['address'] ?? '', style: TextStyle(fontSize: 16)),
-          Text(checkoutInfo['name'] ?? '', style: TextStyle(fontSize: 16)),
-          Text(checkoutInfo['phone'] ?? '', style: TextStyle(fontSize: 16)),
-          SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: onEdit, // Gọi hàm callback
-            child: Text("Đổi thông tin"),
+          Text(
+            checkoutInfo['address'] ?? '',
+            style: TextStyle(
+                color: const Color.fromARGB(255, 122, 116, 116), fontSize: 16),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    checkoutInfo['name'] ?? '',
+                    style: TextStyle(
+                        color: const Color.fromARGB(255, 122, 116, 116),
+                        fontSize: 16),
+                  ),
+                  Text(
+                    checkoutInfo['phone'] ?? '',
+                    style: TextStyle(
+                        color: const Color.fromARGB(255, 122, 116, 116),
+                        fontSize: 16),
+                  ),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: onEdit,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 88, 158, 38),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text("Đổi", style: TextStyle(fontSize: 15)),
+              ),
+            ],
+          ),
+          Text(
+            checkoutInfo['note'] ?? '',
+            style: TextStyle(
+                color: const Color.fromARGB(255, 25, 122, 28),
+                fontWeight: FontWeight.bold,
+                fontSize: 16),
+          ),
+          SizedBox(height: 10),
         ],
       ),
     );

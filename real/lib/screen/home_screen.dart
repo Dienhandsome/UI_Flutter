@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:real/helpers/auth_helper.dart';
 import 'package:real/models/category_model.dart';
 import 'package:real/models/product_model.dart';
 import 'package:real/screen/cart/cart_screen.dart';
@@ -91,6 +92,21 @@ class _HomeScreenState extends State<HomeScreen> {
             Text('ĐT - Market'),
           ],
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                const Color.fromARGB(255, 46, 121, 49)!, // Màu xanh lá đậm
+                const Color.fromARGB(
+                    255, 191, 240, 75)!, // Màu xanh lá trung bình
+                const Color.fromARGB(
+                    255, 232, 225, 92)!, // Màu xanh lá nhạt hơn
+              ],
+              begin: Alignment.topLeft, // Điểm bắt đầu gradient
+              end: Alignment.bottomRight, // Điểm kết thúc gradient
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -122,16 +138,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Color.fromARGB(255, 7, 116, 14),
                       borderRadius: BorderRadius.circular(12),
                     ),
+                    //Nút ấn dô ==> r oke
                     child: IconButton(
                       icon: Icon(
                         Icons.shopping_cart,
                         color: Colors.white,
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CartScreen()),
-                        );
+                      onPressed: () async {
+                        final isAuthenticated =
+                            await AuthHelper.checkAuthAndNavigate(context);
+
+                        if (isAuthenticated) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CartScreen()),
+                          );
+                        }
                       },
                     ),
                   ),

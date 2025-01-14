@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:real/helpers/auth_helper.dart';
 import 'package:real/models/Cart_model.dart';
 import 'package:real/provider/cart_provider.dart';
 import 'package:real/services/Cart_service.dart';
@@ -69,25 +70,29 @@ class ProductCardWidget extends StatelessWidget {
             ),
             child: ElevatedButton(
               onPressed: () async {
-                try {
-                  cartProvider.addToCart(CartItem(
-                      productId: product.iDThucPham ?? 0,
-                      name: product.tenThucPham ?? "",
-                      price: (product.giaBan ?? 0).toDouble(),
-                      urlImage: product.image ?? ""));
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Đã thêm vào giỏ hàng'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Không thể thêm vào giỏ hàng'),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
+                final isAuthenticated =
+                    await AuthHelper.checkAuthAndNavigate(context);
+                if (isAuthenticated) {
+                  try {
+                    cartProvider.addToCart(CartItem(
+                        productId: product.iDThucPham ?? 0,
+                        name: product.tenThucPham ?? "",
+                        price: (product.giaBan ?? 0).toDouble(),
+                        urlImage: product.image ?? ""));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Đã thêm vào giỏ hàng'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Không thể thêm vào giỏ hàng'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 }
               },
               style: ElevatedButton.styleFrom(

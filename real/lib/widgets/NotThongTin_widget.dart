@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class NoThongTinWidget extends StatelessWidget {
@@ -14,6 +16,14 @@ class NoThongTinWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
         border: Border.all(color: Colors.grey.shade300),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 224, 145, 26).withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 3,
+            offset: Offset(0, 1),
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,7 +34,10 @@ class NoThongTinWidget extends StatelessWidget {
               SizedBox(width: 10),
               Text(
                 "Nhập thông tin nhận hàng",
-                style: TextStyle(color: Colors.orange, fontSize: 16),
+                style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),

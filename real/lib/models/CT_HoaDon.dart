@@ -1,25 +1,22 @@
-class CtHoaDon {
-  CtHoaDon({
+class CT_HoaDon {
+  CT_HoaDon({
     required this.iDThucPham,
     required this.tenThucPham,
     required this.soLuong,
     required this.donGia,
-    required this.thanhTien,
   });
 
   final int? iDThucPham;
   final String? tenThucPham;
-  final double? soLuong;
-  final double? donGia;
-  final double? thanhTien;
+  final int? soLuong;
+  final int? donGia;
 
-  factory CtHoaDon.fromJson(Map<String, dynamic> json) {
-    return CtHoaDon(
+  factory CT_HoaDon.fromJson(Map<String, dynamic> json) {
+    return CT_HoaDon(
       iDThucPham: json["iD_ThucPham"],
       tenThucPham: json["tenThucPham"],
       soLuong: json["soLuong"],
       donGia: json["donGia"],
-      thanhTien: json["thanhTien"],
     );
   }
 
@@ -28,6 +25,5 @@ class CtHoaDon {
         "tenThucPham": tenThucPham,
         "soLuong": soLuong,
         "donGia": donGia,
-        "thanhTien": thanhTien,
       };
 }

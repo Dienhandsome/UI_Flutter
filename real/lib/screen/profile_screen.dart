@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:real/models/user_model.dart';
 import 'package:real/screen/DangNhap.dart';
 import 'package:real/screen/ShipingAddress.dart';
 import 'package:real/screen/editProfileScreen.dart';
 import 'package:real/screen/quenmatkhau.dart';
+import 'package:real/services/user_service.dart';
+import 'package:real/services/token_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String hoTen;
@@ -19,14 +22,34 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final UserService _userService = UserService();
+  final TokenService _tokenService = TokenService();
+  User? _user;
   late String _hoTen;
   late String _sdt;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     _hoTen = widget.hoTen;
     _sdt = widget.sdt;
+    _loadUserProfile();
+  }
+
+  Future<void> _loadUserProfile() async {
+    try {
+      final user = await _userService.getUserProfile();
+      setState(() {
+        _user = user;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error loading profile: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   void _navigateToEditProfile() async {
@@ -34,16 +57,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => EditProfileScreen(
-          hoTen: _hoTen,
-          sdt: _sdt,
+          hoTen: _user?.fullName ?? '',
+          sdt: _user?.phoneNumber ?? '',
         ),
       ),
     );
 
-    if (result != null) {
+    if (result != null && result['updated'] == true) {
+      await _loadUserProfile();
       setState(() {
-        _hoTen = result['hoTen'];
-        _sdt = result['sdt'];
+        _hoTen = _user?.fullName ?? '';
+        _sdt = _user?.phoneNumber ?? '';
       });
     }
   }
@@ -63,6 +87,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       MaterialPageRoute(
         builder: (context) => quenmatkhau(),
       ),
+    );
+  }
+
+  Future<void> _handleLogout() async {
+    await _tokenService.deleteTokens();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SignIn()),
     );
   }
 
@@ -92,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CircleAvatar(
                     radius: 70,
                     backgroundImage: NetworkImage(
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT73vDfNnuj1CmjAq9XMTWFGQdsZKR2uw-wkg&s",
+                      "https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-1/426563325_1510109033103723_6688801785968523102_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=101&ccb=1-7&_nc_sid=e99d92&_nc_ohc=6g1f21RMs8QQ7kNvgEJ0ntm&_nc_oc=AdjAzDGwx-AmDHwYP5R2e5aYIrPZEnRJHxCOkkda00xPC2YX3qOMPxvpq_YLxe1zwj2mgYsaiK5usYb2TYek41rd&_nc_zt=24&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=AD8bKDhbH_nT2BEbP-ZfL3d&oh=00_AYBweurvQRSTR56HERFQTpcQttUeyOC4Z3DrvxsaWbfjHQ&oe=678C569C",
                     ),
                   ),
                   Positioned(
@@ -111,24 +143,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 20),
               // Name and Info
-              Text(
-                _hoTen,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+              Center(
+                child: Column(
+                  children: [
+                    _buildInfoRow('Họ tên', _user?.fullName ?? ''),
+                    _buildInfoRow('Email', _user?.email ?? ''),
+                    _buildInfoRow('Số điện thoại', _user?.phoneNumber ?? ''),
+                    _buildInfoRow('Địa chỉ', _user?.address ?? ''),
+                  ],
                 ),
               ),
-              SizedBox(height: 8),
-              Text(
-                "Email: lebaothienbiti@gmail.com ${widget.email}",
-                style: TextStyle(fontSize: 16, color: Colors.black54),
-              ),
-              Text(
-                "SĐT: 0865340630 $_sdt",
-                style: TextStyle(fontSize: 16, color: Colors.black54),
-              ),
-              SizedBox(height: 20),
               // Options Card
               Card(
                 shape: RoundedRectangleBorder(
@@ -147,31 +171,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: _navigateToEditProfile,
                       ),
                       Divider(),
-                      _buildOption(
-                        icon: Icons.location_on,
-                        title: 'Địa chỉ giao hàng',
-                        onTap: _navigateToShippingAddress,
-                      ),
-                      Divider(),
-                      _buildOption(
-                        icon: Icons.lock,
-                        title: 'Quên mật khẩu',
-                        onTap: _navigateToForgotPassword,
-                      ),
                     ],
                   ),
                 ),
               ),
               SizedBox(height: 15),
               TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            SignIn()), // Điều hướng đến màn hình đăng nhập
-                  );
-                },
+                onPressed: _handleLogout,
                 child: Text(
                   'Đăng xuất',
                   style: TextStyle(
@@ -202,6 +208,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       trailing: Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onTap,
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 120,
+            child: Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[700],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

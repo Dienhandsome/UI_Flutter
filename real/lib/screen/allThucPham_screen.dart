@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:real/models/Thucpham_model.dart';
+import 'package:real/provider/cart_provider.dart';
 import 'package:real/services/TimThucPham_service.dart';
 import 'package:real/widgets/ProductCardAll_widget.dart';
 
@@ -17,6 +18,7 @@ class AllThucPham extends StatefulWidget {
 class _AllThucPhamState extends State<AllThucPham> {
   final TimthucphamService _service = TimthucphamService();
   List<Thucpham> products = [];
+  final Aprovider cartProvider = Aprovider();
   bool isLoading = true;
   String? tenLoaiThucPham; // Tên loại thực phẩm, lấy từ API
 
@@ -133,6 +135,7 @@ class _AllThucPhamState extends State<AllThucPham> {
                                   itemCount: products.length,
                                   itemBuilder: (context, index) {
                                     return ProductCardAllWidget(
+                                        cartProvider: cartProvider,
                                         thucpham: products[index]);
                                   },
                                 ),
