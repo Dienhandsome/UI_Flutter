@@ -13,7 +13,7 @@ class Thucpham {
   final int? iDThucPham;
   final String? tenThucPham;
   final String? dvt;
-  final int? soLuong;
+  final double? soLuong;
   final int? giaBan;
   final String? image;
   final int? iDLoaiThucPham;
@@ -24,7 +24,9 @@ class Thucpham {
       iDThucPham: json["iD_ThucPham"],
       tenThucPham: json["tenThucPham"],
       dvt: json["dvt"],
-      soLuong: json["soLuong"],
+      soLuong: (json["soLuong"] is int)
+          ? (json["soLuong"] as int).toDouble() // Chuyển đổi int sang double
+          : json["soLuong"] as double?, // Giữ nguyên nếu đã là double
       giaBan: json["giaBan"],
       image: json["image"],
       iDLoaiThucPham: json["iD_LoaiThucPham"],
